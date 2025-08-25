@@ -11,17 +11,6 @@
 
 /////////////////////////// LORA RADIO CONFIG ///////////////////////////
 
-// For sending 6 bytes ("6 characters") of data using different Spreading Factors (SF), the estimated time on air (ToA)
-//
-// SF7: Approximately 0.027 seconds (27.494 milliseconds)
-// SF8: Approximately 0.052 seconds (52.224 milliseconds)
-// SF9: Approximately 0.100 seconds (100.147 milliseconds)
-// SF10: Approximately 0.193 seconds (193.413 milliseconds)
-// SF11: Approximately 0.385 seconds (385.297 milliseconds)
-// SF12: Approximately 0.746 seconds (746.127 milliseconds)
-//
-// These calculations demonstrate how the time on air increases with higher Spreading Factors
-// due to the decreased data rate, which is a trade-off for increased communication range and signal robustness.
 
 #define BAND                      868E6     // 433E6 MHz or 868E6 MHz or 915E6 MHz
 #define TX_OUTPUT_POWER           22       // dBm tx output power
