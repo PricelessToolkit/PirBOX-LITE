@@ -226,20 +226,27 @@ void loop() {
     payload += ",\"b\":"; payload += batt();
     payload += "}";
 
-    // Obfuscate after JSON is fully built
+    // Copy to TX buffer (binary-safe)
+    uint8_t buf[255];
+    size_t len = payload.length();
+    if (len > sizeof(buf)) len = sizeof(buf);   // clamp to buffer size
+    memcpy(buf, payload.c_str(), len);          // copy plaintext
+
+    // Apply XOR obfuscation (manual loop)
     #if Encryption
-      payload = xorCipher(payload);
+      static const uint8_t key[] = encryption_key;
+      const int K = encryption_key_length;
+      for (size_t i = 0; i < len; ++i) {
+        buf[i] ^= key[i % K];
+      }
     #endif
 
-    // Send as raw bytes (binary-safe)
-    uint8_t* buf = (uint8_t*)payload.c_str();
-    uint8_t len  = (uint8_t)payload.length();
-
+    // Send over LoRa
     if (lora.Send(buf, len, SX126x_TXMODE_SYNC)) {
       // Success — do not print encrypted data
       delay(20);
     } else {
-      // Optional: brief retry/backoff if needed
+      // Optional retry/backoff
       // delay(30);
       // lora.Send(buf, len, SX126x_TXMODE_SYNC);
     }

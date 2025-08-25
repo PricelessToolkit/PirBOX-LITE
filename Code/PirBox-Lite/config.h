@@ -18,12 +18,13 @@
 // SF9: Approximately 0.100 seconds (100.147 milliseconds)
 // SF10: Approximately 0.193 seconds (193.413 milliseconds)
 // SF11: Approximately 0.385 seconds (385.297 milliseconds)
+// SF12: Approximately 0.746 seconds (746.127 milliseconds)
 //
 // These calculations demonstrate how the time on air increases with higher Spreading Factors
 // due to the decreased data rate, which is a trade-off for increased communication range and signal robustness.
 
 #define BAND                      868E6     // 433E6 MHz or 868E6 MHz or 915E6 MHz
-#define TX_OUTPUT_POWER           20        // dBm tx output power
+#define TX_OUTPUT_POWER           22       // dBm tx output power
 
 //| Bandwidth | Supported Spreading Factors |
 //|-----------|-----------------------------|
@@ -31,16 +32,15 @@
 //| 250 kHz   | SF5 – SF10                  |
 //| 500 kHz   | SF5 – SF11                  |
 
-#define LORA_BANDWIDTH            4         // bandwidth 4: 125Khz, 5: 250KHZ, 6: 500Khz
-#define LORA_SPREADING_FACTOR     8         // spreading factor 6-12 [SF5..SF11]
+#define LORA_BANDWIDTH            5         // bandwidth 4: 125Khz, 5: 250KHZ, 6: 500Khz
+#define LORA_SPREADING_FACTOR     10         // spreading factor 6-12 [SF5..SF11]
 #define LORA_CODINGRATE           1         // [1: 4/5, 2: 4/6, 3: 4/7, 4: 4/8]
-#define LORA_PREAMBLE_LENGTH      6         // Same for Tx and Rx
+#define LORA_PREAMBLE_LENGTH      12         // Same for Tx and Rx
 #define LORA_PAYLOADLENGTH        0         // 0: Variable length packet (explicit header),  1..255 for Fixed length packet (implicit header)
 #define LORA_CRC_ON               true
 #define LORA_SYNC_WORD            0x1424    // The 0x1424 private sync word is equivalent to the CapiBridge 0x12 sync word.
 
-
-// LoRa Sync Word Compatibility Table
+// LoRa Sync Word Compatibility Table20
 //
 // This table shows how 16-bit sync words used on "PirBOX" SX126x-based modules (like Ra-01SH) correspond to the 8-bit sync words used on older SX127x-based modules.
 //
